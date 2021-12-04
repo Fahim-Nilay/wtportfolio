@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GITHUB USERS</title>
+
+      <style>
+            body {
+                  background-color: rgb(200, 173, 230);
+                  font-family: lucida sans;
+                  width: 50%;
+                  float: center;
+                }
+
+            
+            .users {
+                  width: 50%;
+                  float: left;
+                  margin-left: 5%;
+                  padding-left: 2%;
+                 }
+
+            h1 {
+                  font-size: 40px;
+                  text-align: center;
+            }
+
+            section {
+                  height: 50%;
+                  padding-bottom: 50%;
+            }
+
+            footer p {
+                color:#565555;
+                font-size: 20px;
+                position: absolute;
+                left:50%;
+                bottom:10px;
+                transform: translateX(-50%);
+                
+            }
+            button{
+                border: 2px solid rgb(247, 191, 9);
+                padding: 15px;
+                float: center;
+                border-radius: 30px;
+            }
+      </style>
+</head>
+
+<body>
+      <h1>Github Users</h1>
+      <button id="load">Load Data</button>
+
+      <div class="users">
+            <section id="info"></section>
+      </div>
+      <section id="info"></section>
+
+      <div class="half-width">
+
+
+
+            <script>
+                  document.getElementById('load').addEventListener('click', loadm);
+
+                  function loadm() {
+                        var req = new XMLHttpRequest();
+                        req.open('GET', 'https://api.github.com/users');
+
+                        req.onload = function () {
+                              if (req.status == 200) {
+                                    for (var i = 0; i <= 9; i++) {
+                                          var data = JSON.parse(req.responseText);
+                                          var url = data[i].avatar_url;
+                                          var id = data[i].id;
+                                          var login = data[i].login;
+
+                                          var display = '<img src=' + '"' + url + '"' + 'height=180px' + ' width=150px' + '>' + " " + "ID:" + id + "  " + "Login: " + login;
+                                          document.getElementById('info').innerHTML += display;
+                                          
+                                    }
+
+
+                              }
+                        }
+                        req.send();
+                  }
+
+            </script>
+      </div>
+      
+
+
+</body>
+<footer>
+      <P>© Copyright by Fahim Hasan Nilay</P>
+</footer>
